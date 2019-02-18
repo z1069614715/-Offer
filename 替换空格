@@ -1,0 +1,9 @@
+题目链接：https://www.nowcoder.com/practice/4060ac7e3e404ad1a894ef3e17650423?tpId=13&tqId=11155&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+public class Solution {
+    public String replaceSpace(StringBuffer str) {
+    	while (str.indexOf(" ") != - 1){
+            str.replace(str.indexOf(" "),str.indexOf(" ") + 1,"%20");
+        }
+        return str.toString();
+    }
+}
