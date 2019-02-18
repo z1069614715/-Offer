@@ -1,0 +1,28 @@
+题目链接：https://www.nowcoder.com/practice/abc3fe2ce8e146608e868a70efebf62e?tpId=13&tqId=11154&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tPage=1
+if (array[0].length == 0){
+            return false;
+        }
+
+        boolean isDis = false;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i][0] <= target && array[i][array[i].length - 1] >= target){
+                isDis = true;
+                int right = array[i].length - 1, left = 0;
+                 while (right > left){
+                     int middle = (right + left + 1) / 2;
+                     if (array[i][middle] > target){
+                         right = middle - 1;
+                     }else {
+                         left = middle + 1;
+                     }
+                 }
+                 if (array[i][right] == target){
+                     return true;
+                 }
+            }else if (isDis){
+                break;
+            }
+        }
+
+        return false;
