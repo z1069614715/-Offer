@@ -1,0 +1,15 @@
+题目链接：https://www.nowcoder.com/practice/8c82a5b80378478f9484d87d1c5f12a4?tpId=13&tqId=11161&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+public class Solution {
+    public int JumpFloor(int target) {
+        int arr[] = {1,2};
+        if(target < 3){
+            return arr[target - 1];
+        }
+        for(int i = 3;i <= target;i++){
+            int newval = arr[0] + arr[1];
+            arr[0] = arr[1];
+            arr[1] = newval;
+        }
+        return arr[1];
+    }
+}
