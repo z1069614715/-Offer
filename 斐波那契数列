@@ -1,0 +1,23 @@
+题目链接：https://www.nowcoder.com/practice/c6c7742f5ba7442aada113136ddea0c3?tpId=13&tqId=11160&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+public class FibonacciTest {
+    public static int Fibonacci(int n){
+        if (n == 0) return 0;
+        else {
+            int arr[] = {1,1};
+            if (n < 3){
+                return arr[n - 1];
+            }
+            for (int i = 3; i <= n; i++) {
+                int val = arr[1];
+                int newVal = arr[0] + arr[1];
+                arr[0] = val;
+                arr[1] = newVal;
+            }
+            return arr[1];
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Fibonacci(9));
+    }
+}
