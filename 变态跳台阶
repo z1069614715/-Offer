@@ -1,0 +1,7 @@
+题目链接：https://www.nowcoder.com/practice/22243d016f6b47f2a6928b4313c85387?tpId=13&tqId=11162&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+public class Solution {
+    public int JumpFloorII(int target) {
+        if(target == 0) return 0;
+        return (int)Math.pow(2,target - 1);
+    }
+}
