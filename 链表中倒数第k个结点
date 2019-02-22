@@ -1,0 +1,43 @@
+题目链接：https://www.nowcoder.com/practice/529d3ae5a407492994ad2a246518148a?tpId=13&tqId=11167&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+public class LinkedListNode {
+    static class ListNode1 {
+        int val;
+        ListNode1 next = null;
+
+        ListNode1(int x) {
+            val = x;
+        }
+    }
+
+    public static ListNode1 FindKthToTail(ListNode1 head, int k) {
+        if (head == null || k <= 0) return null;
+        ListNode1 a = head;
+        ListNode1 b = head;
+        for (int i = 1; i < k; i++) {
+            if (a.next != null) {
+                a = a.next;
+            }else {
+                return null;
+            }
+        }
+
+        while (a.next != null) {
+            a = a.next;
+            b = b.next;
+        }
+
+        return b;
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {1, 2, 3, 4, 5};
+        ListNode1 node = new ListNode1(arr[0]);
+        ListNode1 aim = node;
+        for (int i = 1; i < arr.length; i++) {
+            ListNode1 node1 = new ListNode1(arr[i]);
+            node.next = node1;
+            node = node1;
+        }
+        System.out.println(FindKthToTail(aim,6).val);
+    }
+}
