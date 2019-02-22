@@ -1,0 +1,42 @@
+题目链接：https://www.nowcoder.com/practice/75e878df47f24fdc9dc3e400ec6058ca?tpId=13&tqId=11168&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+public class reverselist {
+    static class ListNode{
+        int val;
+
+        ListNode next = null;
+
+        ListNode(int x){
+            val = x;
+        }
+    }
+    public static ListNode ReverseList(ListNode head) {
+        if (head == null) return null;
+        ListNode a = new ListNode(head.val);
+        while (true){
+            if (head.next != null){
+                head = head.next;
+            }else {
+                return a;
+            }
+            ListNode newNode = new ListNode(head.val);
+            newNode.next = a;
+            a = newNode;
+        }
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {1,2,3,4};
+        ListNode node = new ListNode(arr[0]);
+        ListNode beginNode = node;
+        for (int i = 1; i < arr.length; i++) {
+            ListNode a = new ListNode(arr[i]);
+            node.next = a;
+            node = a;
+        }
+        ListNode a = ReverseList(beginNode);
+        while (a != null){
+            System.out.println(a.val);
+            a = a.next;
+        }
+    }
+}
