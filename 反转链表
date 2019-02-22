@@ -9,7 +9,7 @@ public class reverselist {
             val = x;
         }
     }
-    public static ListNode ReverseList(ListNode head) {
+    public static ListNode ReverseList1(ListNode head) {
         if (head == null) return null;
         ListNode a = new ListNode(head.val);
         while (true){
@@ -24,8 +24,21 @@ public class reverselist {
         }
     }
 
+    public static ListNode ReverseList(ListNode head) {
+        if (head == null) return null;
+        ListNode node = new ListNode(-1);
+        node.next = head;
+        while (head.next != null){
+            ListNode newnode = head.next;
+            head.next = newnode.next;
+            newnode.next = node.next;
+            node.next = newnode;
+        }
+        return node.next;
+    }
+
     public static void main(String[] args) {
-        int arr[] = {1,2,3,4};
+        int arr[] = {1,2,3,4,5,6};
         ListNode node = new ListNode(arr[0]);
         ListNode beginNode = node;
         for (int i = 1; i < arr.length; i++) {
