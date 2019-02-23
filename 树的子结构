@@ -1,0 +1,65 @@
+题目链接：https://www.nowcoder.com/practice/6e196c44c7004d15b1610b9afca8bd88?tpId=13&tqId=11170&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+import java.util.ArrayList;
+import java.util.List;
+
+public class 树的子结构 {
+
+    static class TreeNode {
+        int val;
+        TreeNode right = null;
+        TreeNode left = null;
+
+        TreeNode(int x) {
+            val = x;
+        }
+
+    }
+
+    public static boolean HasSubtree(TreeNode root1, TreeNode root2) {
+        if (root2 == null) {
+            return false;
+        }
+        boolean result = false;
+        if (root1 != null) {
+            if (root1.val == root2.val) {
+                result = GetTreeEqual(root1, root2);
+            }
+
+            if (!result) result = HasSubtree(root1.left, root2);
+
+            if (!result) result = HasSubtree(root1.right, root2);
+
+        }
+        return result;
+    }
+
+    public static boolean GetTreeEqual(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 != null) return false;
+        if (root2 == null) return true;
+        if (root1.val != root2.val) return false;
+
+        return GetTreeEqual(root1.left, root2.left) && GetTreeEqual(root1.right, root2.right);
+    }
+
+    public static TreeNode CreetTree(int arr[]) {
+        List<TreeNode> data = new ArrayList<TreeNode>();
+        for (int x :
+                arr) {
+            data.add(new TreeNode(x));
+        }
+        for (int i = 0; i < arr.length / 2; i++) {
+            if (data.get(i * 2 + 1).val != 0) data.get(i).left = data.get(i * 2 + 1);
+            if (i * 2 + 2 < arr.length && data.get(i * 2 + 2).val != 0) data.get(i).right = data.get(i * 2 + 2);
+        }
+        return data.get(0);
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {8, 8, 7, 9, 2, 0, 0, 0, 0, 4, 7};
+        int brr[] = {8, 9, 2};
+
+        TreeNode tree = CreetTree(arr);
+        TreeNode tree1 = CreetTree(brr);
+        System.out.println(HasSubtree(tree, tree1));
+    }
+}
