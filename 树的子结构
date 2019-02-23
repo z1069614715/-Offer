@@ -16,11 +16,8 @@ public class 树的子结构 {
     }
 
     public static boolean HasSubtree(TreeNode root1, TreeNode root2) {
-        if (root2 == null) {
-            return false;
-        }
         boolean result = false;
-        if (root1 != null) {
+        if (root1 != null $$ root2 != null) {
             if (root1.val == root2.val) {
                 result = GetTreeEqual(root1, root2);
             }
