@@ -1,0 +1,45 @@
+题目链接：https://www.nowcoder.com/practice/4c776177d2c04c2494f2555c9fcc1e49?tpId=13&tqId=11173&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+import java.util.Stack;
+
+public class 包含min函数的栈 {
+    Stack<Integer> stack = new Stack<>();
+    Stack<Integer> stack1 = new Stack<>();
+    public void push(int node) {
+        stack.push(node);
+        if (stack1.isEmpty()) stack1.push(node);
+        else if (node <= stack1.peek()) stack1.push(node);
+        else stack1.push(stack1.peek());
+    }
+
+    public void pop() {
+        stack1.pop();
+        stack.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int min() {
+        return stack1.peek();
+    }
+    public static void main(String[] args) {
+        包含min函数的栈 a = new 包含min函数的栈();
+        a.push(3);
+        System.out.println(a.min());
+        a.push(4);
+        System.out.println(a.min());
+        a.push(2);
+        System.out.println(a.min());
+        a.push(3);
+        System.out.println(a.min());
+        a.pop();
+        System.out.println(a.min());
+        a.pop();
+        System.out.println(a.min());
+        a.pop();
+        System.out.println(a.min());
+        a.push(0);
+        System.out.println(a.min());
+    }
+}
