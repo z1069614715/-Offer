@@ -1,0 +1,52 @@
+题目链接：https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&tqId=11176&rp=1&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking
+public class BinarySearchTree {
+
+    public boolean VerifySquenceOfBST(int[] sequence) {
+        if (sequence.length == 0) return false;
+        return IsBinarySearchTree(sequence, 0, sequence.length - 1);
+    }
+
+    public boolean IsBinarySearchTree1(int[] arr, int BeginIndex, int EndIndex) {
+        if (BeginIndex >= EndIndex) return true;
+        int index = EndIndex;
+        while (index > BeginIndex && arr[index - 1] > arr[EndIndex]) index--;
+        for (int i = BeginIndex; i < index; i++) {
+            if (arr[i] > arr[EndIndex]) return false;
+        }
+        return IsBinarySearchTree(arr, BeginIndex, index - 1) && IsBinarySearchTree(arr, index, EndIndex - 1);
+    }
+
+    public boolean IsBinarySearchTree(int[] arr, int BeginIndex, int EndIndex) {
+        if (BeginIndex >= EndIndex) return true;
+        int index = -1;
+        int rootVal = arr[EndIndex];
+        boolean isTrue = true;
+        boolean isLeft = false;
+        boolean isRight = false;
+        for (int i = BeginIndex; i <= EndIndex; i++) {
+            if (i == BeginIndex && !isLeft && arr[i] < rootVal) isLeft = true;
+            else if (!isLeft && arr[i] < rootVal) return false;
+            else if (isLeft && !isRight && arr[i] > rootVal) {
+                index = i;
+                isLeft = false;
+                isRight = true;
+            } else if (!isLeft && !isRight && arr[i] > rootVal) {
+                index = i;
+                isRight = true;
+            }
+        }
+        if (index == -1 && isLeft && !isRight) index = EndIndex - 1;
+        if (isLeft || (!isLeft && index != BeginIndex && index != -1))
+            isTrue = IsBinarySearchTree(arr, BeginIndex, index - 1);
+        if (isTrue && isRight) isTrue = IsBinarySearchTree(arr, index, EndIndex - 1);
+        return isTrue;
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {1, 4, 6, 2, 3, 13, 14, 10, 8};
+//        int arr[] = {1, 7, 6};
+        int brr[] = new int[0];
+        BinarySearchTree a = new BinarySearchTree();
+        System.out.println(a.VerifySquenceOfBST(arr));
+    }
+}
